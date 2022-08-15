@@ -1,0 +1,23 @@
+body {
+	font-family: verdana, sans-serif;
+}
+section {
+	color: lightblue;
+}
+a {
+	color: blue;
+	text-decoration: none;
+}
+h2, h3 {
+	color: darkgray;
+}
+header {
+	color: darkblue;
+}
+header p {
+	color: gray;
+}
+table, td, th {
+	border: solid 1px;
+	text-align: center;
+}
