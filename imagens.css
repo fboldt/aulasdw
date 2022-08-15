@@ -1,0 +1,21 @@
+.figuras {
+    display: flex;
+    flex-direction: row;
+}
+.figuras figure {
+    margin:auto;
+}
+.figuras figure figcaption {
+    color: black;
+    font-weight: bold;
+    text-align: center;
+    font-size: small;
+}
+header {
+    background-image: url("275-100x150.jpg");
+    height: 150px;
+    background-repeat: repeat-x;
+}
+body {
+    margin: 5rem;
+}

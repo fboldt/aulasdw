@@ -4,10 +4,6 @@ body {
 section {
 	color: lightblue;
 }
-a {
-	color: blue;
-	text-decoration: none;
-}
 h2, h3 {
 	color: darkgray;
 }
@@ -20,4 +16,17 @@ header p {
 table, td, th {
 	border: solid 1px;
 	text-align: center;
+}
+a:link {
+	color: green;
+}
+a:visited {
+	color: yellow;
+}
+a:hover {
+	color: blue;
+	text-decoration: none;
+}
+a:active {
+	color: red;
 }
