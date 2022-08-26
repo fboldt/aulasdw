@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -12,12 +13,33 @@
         }
     </style>
 </head>
+
 <body>
     <h1>JavaScript</h1>
-    <h2>Introdução</h2>
     <h2>Árvore DOM</h2>
-    <h2>Criação de elementos</h2>
+    <h2>Eventos</h2>
+    <p>
+        <button onclick="alert('atributo');">
+            handler via atributo
+        </button>
+    </p>
+    <p><button id="hldrprop">handler via properties</button></p>
+    <script>
+        const btnhldr = document.querySelector('#hldrprop')
+        btnhldr.onclick = () => {
+            alert('propriedade')
+        }
+    </script>
+    <p><button id="listener">handler via listener</button></p>
+    <script>
+        const btnlist = document.querySelector('#listener')
+        btnlist.addEventListener("click", () => {
+            alert('listener')
+        })
+    </script>
+    <h2>CSS</h2>
     <h2>Networking</h2>
-    <h2>Persistência</h2>
+    <h2>Armazenamento</h2>
 </body>
+
 </html>
