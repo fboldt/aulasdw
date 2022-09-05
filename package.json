@@ -1,0 +1,24 @@
+{
+  "name": "aulasdw",
+  "version": "1.0.0",
+  "description": "Aulas de desenvolvimento web para BSI.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fboldt/aulasdw.git"
+  },
+  "keywords": [
+    "web",
+    "development"
+  ],
+  "author": "Francisco Boldt",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fboldt/aulasdw/issues"
+  },
+  "homepage": "https://github.com/fboldt/aulasdw#readme"
+}
