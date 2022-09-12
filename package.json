@@ -20,5 +20,11 @@
   "bugs": {
     "url": "https://github.com/fboldt/aulasdw/issues"
   },
-  "homepage": "https://github.com/fboldt/aulasdw#readme"
+  "homepage": "https://github.com/fboldt/aulasdw#readme",
+  "dependencies": {
+    "express": "^4.18.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.19"
+  }
 }
