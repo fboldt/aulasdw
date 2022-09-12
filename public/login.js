@@ -9,7 +9,7 @@ section_login.innerHTML = formloginhtml
 
 const checklogin = async (data) => {
     if (data.username != "") {
-        section_login.innerHTML = `${data.username} <a href="logout">logout</a>`
+        section_login.innerHTML = `${data.username} <a href="login">logout</a>`
     } else {
         section_login.innerHTML = formloginhtml        
     }
