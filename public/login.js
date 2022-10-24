@@ -3,7 +3,7 @@ const sectionlogin = document.querySelector('#sectionlogin')
 const checklogin = async () => {
     const username = localStorage.getItem('username')
     const token = localStorage.getItem('token')
-    if (!username) {
+    if (!username || !token) {
         displayFormLogin()
     } else {
         displayLinkLogout(username)
