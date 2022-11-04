@@ -16,13 +16,48 @@ const displayFormLogin = () => {
             <input type="text" name="username" placeholder="username" size="6">
             <input type="password" name="password" placeholder="password" size="6">
             <button type="submit">login</button>
-        </form>`
+        </form>
+        <a href="">cadastre-se</a>`
     const formlogin = sectionlogin.querySelector('form')
     formlogin.addEventListener('submit', function (evento) {
         evento.preventDefault()
         const payload = new URLSearchParams(new FormData(this))
         sendLogin(payload)
     })
+    const linkcad = sectionlogin.querySelector('a')
+    linkcad.addEventListener('click', displayFormCadastro)
+}
+
+function displayFormCadastro(evento) {
+    evento.preventDefault()
+    sectionlogin.innerHTML = `
+    <form>
+        <input type="text" name="username" placeholder="username" size="6">
+        <input type="password" name="password" placeholder="password" size="6">
+        <button type="submit">cadastrar</button>
+    </form>`
+    const formcadastro = sectionlogin.querySelector('form')
+    formcadastro.addEventListener('submit', function (evento) {
+        evento.preventDefault()
+        const payload = new URLSearchParams(new FormData(this))
+        sendCadastro(payload)
+    })
+}
+
+const sendCadastro = (payload) => {
+    fetch('login', {
+        method: 'PUT',
+        body: payload,
+    })
+        .then(res => res.json())
+        .then(data => {
+            const { username, token } = data
+            if (username && token) {
+                localStorage.setItem('username', username)
+                localStorage.setItem('token', token)
+            }
+            checklogin()
+        })
 }
 
 const sendLogin = (payload) => {
