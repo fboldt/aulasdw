@@ -1,9 +1,10 @@
+const { StatusCodes } = require('http-status-codes')
 const jwt = require('jsonwebtoken')
 
 const authenticate = async (req, res, next) => {
     const authHeader = req.headers.authorization
     if (!authHeader || !authHeader.startsWith('Bearer')) {
-        return res.status(403).json({"error": "Authetication Failure"})
+        return res.status(StatusCodes.FORBIDDEN).json({"error": "Authetication Failure"})
     }
     const token = authHeader.split(' ')[1]
     try {
@@ -11,7 +12,7 @@ const authenticate = async (req, res, next) => {
         req.user = { "username": payload.username }
         next()
     } catch (error) {
-        return res.status(403).json({ "error": "Authetication Failure" })
+        return res.status(StatusCodes.FORBIDDEN).json({ "error": "Authetication Failure" })
     }
 }
 

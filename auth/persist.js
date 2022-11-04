@@ -3,7 +3,6 @@ const fs = require('fs')
 const setUser = async (username, password) => {
     const users = require('../db/users.json')
     users.push({"username": username, "password": password})
-    console.log(users)
     fs.writeFile('db/users.json', JSON.stringify(users), 'utf8', function (err) {
         if (err) {
             console.log("An error occured while writing JSON Object to File.");
