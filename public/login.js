@@ -45,7 +45,7 @@ function displayFormCadastro(evento) {
 }
 
 const sendCadastro = (payload) => {
-    fetch('login', {
+    fetch('signin', {
         method: 'PUT',
         body: payload,
     })
