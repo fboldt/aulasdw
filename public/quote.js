@@ -1,11 +1,8 @@
 const sectionquote = document.querySelector("#sectionquote")
-sectionquote.innerHTML = `
-    <p></p>
-    <button>Get a quote</button>`
+sectionquote.innerHTML = `<p></p>`
 const quote = sectionquote.querySelector('p')
-const button = sectionquote.querySelector('button')
 
-button.addEventListener('click', function (e) {
+const fetchQuote = () => {
     const token = localStorage.getItem('token')
     fetch('quote', {
         headers: {
@@ -19,4 +16,15 @@ button.addEventListener('click', function (e) {
                 quote.innerHTML = `${quoteText} <i>${quoteAuthor}</i>`
             }
         })
-})
+}
+
+const observerCallback = function (mutationList, observer) {
+    for (const mutation of mutationList) {
+        if (mutation.type === 'childList') {
+            fetchQuote()
+        }
+    }
+}
+
+const changeObserver = new MutationObserver(observerCallback)
+changeObserver.observe(sectionlogin, { childList: true })
