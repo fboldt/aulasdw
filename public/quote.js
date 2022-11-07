@@ -4,18 +4,22 @@ const quote = sectionquote.querySelector('p')
 
 const fetchQuote = () => {
     const token = localStorage.getItem('token')
-    fetch('quote', {
-        headers: {
-            authorization: `Bearer ${token}`
-        }
-    })
-        .then(res => res.json())
-        .then(data => {
-            const { quoteText, quoteAuthor } = data
-            if (quoteText && quoteAuthor) {
-                quote.innerHTML = `${quoteText} <i>${quoteAuthor}</i>`
+    if (!token) {
+        quote.innerHTML = ""
+    } else {
+        fetch('quote', {
+            headers: {
+                authorization: `Bearer ${token}`
             }
         })
+            .then(res => res.json())
+            .then(data => {
+                const { quoteText, quoteAuthor } = data
+                if (quoteText && quoteAuthor) {
+                    quote.innerHTML = `${quoteText} <i>${quoteAuthor}</i>`
+                }
+            })
+    }
 }
 
 const observerCallback = function (mutationList, observer) {
