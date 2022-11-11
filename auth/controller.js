@@ -5,7 +5,7 @@ const User = require('../user/model')
 const login = async (req, res) => {
     const { username, password } = req.body
     const user = await User.findOne({ username })
-    if (user.password == password) {
+    if (user && user.comparePassword(password)) {
         const token = jwt.sign({ username }, process.env.JWT_SECRET,
             { expiresIn: process.env.JWT_LIFETIME })
         return res.status(StatusCodes.OK).json({ username, token })
