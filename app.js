@@ -19,7 +19,7 @@ const authenticate = require('./auth/middleware')
 app.use('/quote', authenticate, quoteRoutes)
 
 const postRoutes = require('./post/routes')
-app.use('/post', postRoutes)
+app.use('/post', authenticate, postRoutes)
 
 //APP
 const port = process.env.PORT || 3000
