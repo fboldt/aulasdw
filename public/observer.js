@@ -3,6 +3,7 @@ const observerCallback = function (mutationList, observer) {
         if (mutation.type === 'childList') {
             fetchQuote()
             displayCreatePost()
+            refreshPosts()
         }
     }
 }

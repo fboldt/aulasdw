@@ -13,7 +13,23 @@ const createPost = async (req, res) => {
     res.status(StatusCodes.CREATED).json({ post })
 }
 
+const deletePost = async (req, res) => {
+    const {
+        user: { userId },
+        params: { id: postId },
+    } = req
+    const post = await Post.findByIdAndRemove({
+        _id: postId,
+        createdBy: userId,
+    })
+    if (post) {
+        return res.status(StatusCodes.OK).json({ 'success': 'true' })
+    }
+    return res.status(StatusCodes.NOT_FOUND).json({ 'success': 'false' })
+}
+
 module.exports = {
     getAllPosts,
-    createPost
+    createPost,
+    deletePost
 }
