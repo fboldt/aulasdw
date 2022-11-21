@@ -22,13 +22,3 @@ const fetchQuote = () => {
     }
 }
 
-const observerCallback = function (mutationList, observer) {
-    for (const mutation of mutationList) {
-        if (mutation.type === 'childList') {
-            fetchQuote()
-        }
-    }
-}
-
-const changeObserver = new MutationObserver(observerCallback)
-changeObserver.observe(sectionlogin, { childList: true })

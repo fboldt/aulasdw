@@ -55,18 +55,10 @@ const displayCreatePost = () => {
             const payload = new URLSearchParams(new FormData(this))
             sendPost(payload, token)
         })
+    } else {
+        const insertPost = sectionposts.querySelector('form')
+        insertPost.remove()
     }
 }
-
-const observerPostsCallback = function (mutationList, observer) {
-    for (const mutation of mutationList) {
-        if (mutation.type === 'childList') {
-            displayCreatePost()
-        }
-    }
-}
-
-const changePostObserver = new MutationObserver(observerPostsCallback)
-changePostObserver.observe(sectionlogin, { childList: true })
 
 fetchPosts()
