@@ -27,7 +27,7 @@ const start = async () => {
     try {
         mongoose.connect(process.env.MONGO_URI).catch(err => console.log(err))
         app.listen(port, () => {
-            console.log(`Listen on port ${port}.`)
+            console.log(`\n\nListen on port ${port}.`)
         })
     } catch (error) {
         console.log(error)
