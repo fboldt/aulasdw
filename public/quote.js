@@ -22,3 +22,4 @@ const fetchQuote = () => {
     }
 }
 
+fetchQuote()
