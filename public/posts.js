@@ -93,7 +93,9 @@ const displayCreatePost = () => {
         })
     } else {
         const insertPost = sectionposts.querySelector('form')
-        insertPost.remove()
+        if (insertPost) {
+            insertPost.remove()
+        }
     }
 }
 
