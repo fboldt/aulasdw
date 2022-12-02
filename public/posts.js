@@ -100,3 +100,4 @@ const displayCreatePost = () => {
 }
 
 fetchPosts()
+displayCreatePost()
