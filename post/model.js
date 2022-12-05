@@ -1,25 +1,33 @@
-const mongoose = require('mongoose')
+const PostMongo = require('./mongodb')
 
-const PostSchema = new mongoose.Schema(
-    {
-        textContent: {
-            type: String,
-            required: [true, 'forneca um conteudo de texto'],
-            maxlength: 300,
-        },
-        author: {
-            type: String,
-            required: [true, 'forneca nomo do autor'],
-            maxlength: 20,
-            minlength: 5,
-        },
-        createdBy: {
-            type: mongoose.Types.ObjectId,
-            ref: 'User',
-            required: [true, 'forneca usuario']
-        },
-    },
-    { timestamps: true }
-)
+class Post {
+    constructor(textContent, author, createdBy) {
+        this.textContent = textContent
+        this.author = author
+        this.createdBy = createdBy
+    }
+    async save() {
+        const textContent = this.textContent
+        const author = this.author
+        const createdBy = this.createdBy
+        const postMongo = await PostMongo.create({ textContent, author, createdBy })
+        if (postMongo) {
+            this.createdAt = postMongo.createdAt
+            this._id = postMongo._id
+        } else {
+            return false
+        }
+        return true
+    }
+    static async find() {
+        return await PostMongo.find().sort({ createdAt: -1 })
+    }
+    static async findByIdAndRemove(postId, userId) {
+        return await PostMongo.findByIdAndRemove({
+            _id: postId,
+            createdBy: userId,
+        })
+    }
+}
 
-module.exports = mongoose.model('Post', PostSchema)
+module.exports = Post
