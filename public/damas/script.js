@@ -16,10 +16,12 @@ function criaTabuleiro() {
         for (let j = 0; j < tamanho; j++) {
             let celula = document.createElement('td');
             linha.append(celula);
-
+            
             celula.style.width = `${tamanhoCelula}px`;
             celula.style.height = `${tamanhoCelula}px`;
             if (i % 2 == j % 2) {
+                celula.addEventListener('dragover', allowDrop)
+                celula.addEventListener('drop', drop)
                 celula.style.backgroundColor = 'black';
                 if (i * 8 + j <= 24) {
                     celula.append(criaPeca('black'));
@@ -36,8 +38,25 @@ function criaTabuleiro() {
 
 function criaPeca(cor) {
     let imagem = document.createElement('img');
+    imagem.id = pecaId++
     imagem.setAttribute('src', `img/${cor}.png`);
-    imagem.setAttribute('width', `${tamanhoCelula-4}px`);
-    imagem.setAttribute('height', `${tamanhoCelula-4}px`);
+    imagem.setAttribute('width', `${tamanhoCelula - 4}px`);
+    imagem.setAttribute('height', `${tamanhoCelula - 4}px`);
+    imagem.setAttribute('draggable', "true")
+    imagem.addEventListener('dragstart', drag)
     return imagem;
+}
+
+function allowDrop(ev) {
+    ev.preventDefault();
+}
+
+function drag(ev) {
+    ev.dataTransfer.setData("pecaid", ev.target.id);
+}
+
+function drop(ev) {
+    ev.preventDefault();
+    const data = ev.dataTransfer.getData("pecaid");
+    ev.target.appendChild(document.getElementById(data));
 }
