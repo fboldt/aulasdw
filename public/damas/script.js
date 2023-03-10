@@ -1,6 +1,6 @@
-const tamanhoCelula = 40;
+const tamanhoCelula = 50;
 let pecaId = 0;
-document.body.append(criaTabuleiro());
+document.querySelector('#tabuleiro').append(criaTabuleiro());
 
 function criaTabuleiro() {
     const tamanho = 8;
