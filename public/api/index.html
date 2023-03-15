@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API</title>
+</head>
+<body>
+    <h1>Exemplo de uso de APIs</h1>
+    <p><a href="http://brasilapi.com.br">Brasil API</a></p>
+    <form action="" method="get">
+        <input type="text" name="cep" placeholder="CEP"><br>
+        <input type="text" name="estado" placeholder="Estado"><br>
+        <input type="text" name="cidade" placeholder="Cidade"><br>
+        <input type="text" name="bairro" placeholder="Bairro"><br>
+        <input type="text" name="logradouro" placeholder="Logradouro"><br>
+        <input type="submit" value="Enviar">
+    </form>
+    <script>
+        const cep = getInputByName("cep")
+        cep.addEventListener('change', (ev) => {
+            const numeroCep = ev.target.value
+            fetch(`https://brasilapi.com.br/api/cep/v1/${numeroCep}`)
+            .then(data => data.json())
+            .then(json => {
+                getInputByName("estado").value = json["state"]
+                getInputByName("cidade").value = json["city"]
+                getInputByName("bairro").value = json["neighborhood"]
+                getInputByName("logradouro").value = json["street"]
+            })
+        })
+        function getInputByName(name) {
+            return document.querySelector(`[name=${name}]`)
+        }
+    </script>
+</body>
+</html>
