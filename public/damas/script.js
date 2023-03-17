@@ -16,17 +16,18 @@ function criaTabuleiro() {
         for (let j = 0; j < tamanho; j++) {
             let celula = document.createElement('td');
             linha.append(celula);
-            
+
             celula.style.width = `${tamanhoCelula}px`;
             celula.style.height = `${tamanhoCelula}px`;
             if (i % 2 == j % 2) {
-                celula.addEventListener('dragover', allowDrop)
                 celula.addEventListener('drop', drop)
                 celula.style.backgroundColor = 'black';
                 if (i * 8 + j <= 24) {
                     celula.append(criaPeca('black'));
                 } else if (i * 8 + j >= 40) {
                     celula.append(criaPeca('red'));
+                } else {
+                    celula.addEventListener('dragover', allowDrop)
                 }
             } else {
                 celula.style.backgroundColor = 'white';
@@ -42,7 +43,8 @@ function criaPeca(cor) {
     imagem.setAttribute('src', `img/${cor}.png`);
     imagem.setAttribute('width', `${tamanhoCelula - 4}px`);
     imagem.setAttribute('height', `${tamanhoCelula - 4}px`);
-    imagem.setAttribute('draggable', "true")
+    if (cor == "red") imagem.setAttribute('draggable', "true")
+    else imagem.setAttribute('draggable', "false")
     imagem.addEventListener('dragstart', drag)
     return imagem;
 }
@@ -58,5 +60,16 @@ function drag(ev) {
 function drop(ev) {
     ev.preventDefault();
     const data = ev.dataTransfer.getData("pecaid");
-    ev.target.appendChild(document.getElementById(data));
+    const peca = document.getElementById(data)
+    peca.parentElement.addEventListener('dragover', allowDrop)
+    ev.target.appendChild(peca);
+    peca.parentElement.removeEventListener('dragover', allowDrop)
+    trocaJogador()
+}
+
+function trocaJogador() {
+    pecas = document.querySelectorAll("img")
+    pecas.forEach(peca => {
+        peca.draggable = !peca.draggable
+    });
 }

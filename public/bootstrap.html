@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bootstrap</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <style>
+        div {
+            border: solid 1px;
+            padding: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="container">
+        <div class="row">
+            <h1>Bootstrap</h1>
+            <div class="col-4">
+                <p>Bootstrap facilita a vida de designers.</p>
+            </div>
+            <div class="col">
+                <p>(e não designers, principalmente)</p>
+            </div>
+        </div>
+    </header>
+
+    <div class="container text-center" style="background-color: aqua;">
+        <div class="row">
+            <div class="col-sm-3">
+            Level 1: .col-sm-3
+            </div>
+            <div class="col-sm-9">
+                <div class="row">
+                    <div class="col-8 col-sm-6">
+                        Level 2: .col-8 .col-sm-6
+                    </div>
+                    <div class="col-4 col-sm-6">
+                        Level 2: .col-4 .col-sm-6
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h2 class="btn btn-info">isso não é um botão</h2>
+            </div>
+            <div class="col">
+                <button class="btn btn-link">isso é um botão</button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="container">
+        <div class="row">
+            <a href="index.html">voltar</a>
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
