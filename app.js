@@ -6,10 +6,10 @@ const app = express()
 app.engine('handlebars', engine());
 app.set('view engine', 'handlebars');
 
-// app.use(express.static('./public'))
-
 app.get("/", (req, res) => { res.render("home") })
-app.get("/sobre", (req, res) => { res.send("sobre") })
+app.get("/sobre", (req, res) => { res.render("sobre") })
+
+app.use(express.static('./public'))
 app.use((req, res) => { res.send("404") })
 app.use((err, req, res, next) => { res.send("500") })
 
