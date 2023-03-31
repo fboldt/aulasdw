@@ -10,8 +10,8 @@ app.get("/", (req, res) => { res.render("home") })
 app.get("/sobre", (req, res) => { res.render("sobre") })
 
 app.use(express.static('./public'))
-app.use((req, res) => { res.send("404") })
-app.use((err, req, res, next) => { res.send("500") })
+app.use((req, res) => { res.render("404") })
+app.use((err, req, res, next) => { res.render("500") })
 
 const port = process.env.PORT || 3000
 app.listen(port, () => {
