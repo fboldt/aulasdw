@@ -13,3 +13,5 @@ const port = process.env.PORT || 3000
 app.listen(port, () => {
     console.log(`\n\nListen on port ${port}.`)
 })
+
+export default app

@@ -1,14 +1,15 @@
 import express from 'express'
 const router = express.Router()
+import handlers from '../handlers/basic.js'
 
-router.get("/", (req, res) => { res.render("home") })
+router.get("/", handlers.home)
 
-router.get("/sobre", (req, res) => { res.render("sobre") })
+router.get("/sobre", handlers.sobre)
 
 router.use(express.static('./public'))
 
-router.use((req, res) => { res.render("404") })
+router.use(handlers.notFound)
 
-router.use((err, req, res, next) => { res.render("500") })
+router.use(handlers.serverError)
 
 export default router
