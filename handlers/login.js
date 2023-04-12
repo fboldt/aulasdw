@@ -1,8 +1,9 @@
+import { verificaCredenciais } from "../controllers/login.js"
 const handlers = {}
 
 handlers.login = (req, res) => {
     const { email, senha } = req.body
-    const success = email == "qwe" && senha == "qwe"
+    const success = verificaCredenciais(email, senha)
     if (success) {
         req.session.username = email
         res.redirect("/")
