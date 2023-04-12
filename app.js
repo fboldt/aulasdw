@@ -4,13 +4,15 @@ import expressSession from 'express-session'
 import { getSessionUser } from './middlewares/login.js'
 import basicRoutes from './routes/basic.js'
 import loginRoutes from './routes/login.js'
+import dotenv from 'dotenv'
+dotenv.config()
 
 const app = express()
 app.use(express.urlencoded({ extended: false }))
 app.use(expressSession({
     resave: false,
     saveUninitialized: false,
-    secret: "batatinhafrita123",
+    secret: process.env.SESSION_SECRET,
 }))
 app.use(getSessionUser)
 
