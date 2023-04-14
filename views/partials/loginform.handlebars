@@ -3,9 +3,13 @@
     <b>{{username}}</b> <a href="/login">logout</a>
 </div>
 {{else}}
-<form action="/login" method="post">
-    <input type="text" name="email" id="email" placeholder="e-mail">
-    <input type="password" name="senha" id="senha" placeholder="senha">
-    <input type="submit" value="entrar">
-</form>
+    {{#if cadastro}}
+    {{else}}
+    <form action="/login" method="post">
+        <input type="email" name="email" id="email" placeholder="e-mail">
+        <input type="password" name="senha" id="senha" placeholder="senha">
+        <input type="submit" value="entrar">
+    </form>
+    <p><a href="signin">cadastre-se</a></p>
+    {{/if}}
 {{/if}}
