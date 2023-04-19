@@ -1,6 +1,10 @@
 {{#if username}}
 <div style="text-align: right;">
-    <b>{{username}}</b> <a href="/login">logout</a>
+    <p><b>{{username}}</b> <a href="/login">logout</a></p>
+    {{#if cadastro}}
+    {{else}}
+    <p><a href="signin/senha">troca senha</a></p>
+    {{/if}}
 </div>
 {{else}}
     {{#if cadastro}}

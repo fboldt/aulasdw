@@ -1,9 +1,9 @@
-import { saveUser } from "../controllers/user.js"
+import { insertUser, changePassword } from "../controllers/user.js"
 const handlers = {}
 
 handlers.action = (req, res) => {
     const { email, senha } = req.body
-    const result = saveUser(email, senha)
+    const result = insertUser(email, senha)
     if (result.success) {
         return res.render("signinsuccess")
     }
@@ -13,6 +13,20 @@ handlers.action = (req, res) => {
 handlers.form = (req, res) => {
     res.locals.cadastro = true
     res.render("signinform")
+}
+
+handlers.formsenha = (req, res) => {
+    res.locals.cadastro = true
+    res.render("trocasenha")
+}
+
+handlers.actionsenha = (req, res) => {
+    const { email, senha } = req.body
+    const result = changePassword(email, senha)
+    if (result.success) {
+        return res.render("senhatrocada")
+    }
+    return res.render("trocasenhafail", { "msg": result.msg })
 }
 
 export default handlers

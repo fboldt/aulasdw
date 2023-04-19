@@ -1,10 +1,10 @@
-import { getUser, saveUser as saveUserDB } from "../db/users.js"
+import { getUser, saveUser, insertUser as insertUserDB } from "../db/users.js"
 import bcrypt from "bcrypt"
 const saltRounds = 10;
 
-function saveUser(email, senha) {
-    const hash = bcrypt.hashSync(senha, saltRounds);
-    const result = saveUserDB(email, hash)
+function insertUser(email, senha) {
+    const hash = bcrypt.hashSync(senha, saltRounds)
+    const result = insertUserDB(email, hash)
     return result
 }
 
@@ -14,4 +14,10 @@ function verificaCredenciais(email, senha) {
     return false
 }
 
-export { saveUser, verificaCredenciais }
+function changePassword(email, senha) {
+    const hash = bcrypt.hashSync(senha, saltRounds)
+    const result = saveUser(email, hash)
+    return result
+}
+
+export { insertUser, verificaCredenciais, changePassword }
