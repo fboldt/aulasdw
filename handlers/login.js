@@ -1,4 +1,4 @@
-import { verificaCredenciais } from "../controllers/login.js"
+import { verificaCredenciais } from "../controllers/user.js"
 const handlers = {}
 
 handlers.login = (req, res) => {

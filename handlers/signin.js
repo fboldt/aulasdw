@@ -1,4 +1,4 @@
-import { saveUser } from "../controllers/signin.js"
+import { saveUser } from "../controllers/user.js"
 const handlers = {}
 
 handlers.action = (req, res) => {

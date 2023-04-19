@@ -1,10 +1,10 @@
 [
  {
   "email": "a@a",
-  "senha": "a"
+  "senha": "$2b$10$doPmYSF5KNNeGpfSBG6ymuDjPJk.MoLA2Dmddhyw9nn7I3gcAmwmi"
  },
  {
   "email": "q@q",
-  "senha": "q"
+  "senha": "$2b$10$/EUaWoZ1YEYA7vSrv.3QvOJxJBrN1bZVLIEmC5TkbWagAGwxEExCm"
  }
 ]
