@@ -1,9 +1,9 @@
 import { verificaCredenciais } from "../controllers/user.js"
 const handlers = {}
 
-handlers.login = (req, res) => {
+handlers.login = async (req, res) => {
     const { email, senha } = req.body
-    const success = verificaCredenciais(email, senha)
+    const success = await verificaCredenciais(email, senha)
     if (success) {
         req.session.username = email
         res.redirect("/")

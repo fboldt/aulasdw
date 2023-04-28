@@ -7,6 +7,7 @@
   "scripts": {
     "test": "NODE_OPTIONS=--experimental-vm-modules jest",
     "dev": "nodemon app.js",
+    "build": "node db/build.js",
     "start": "node app.js"
   },
   "author": "Francisco Boldt",
@@ -16,7 +17,8 @@
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "express-handlebars": "^7.0.4",
-    "express-session": "^1.17.3"
+    "express-session": "^1.17.3",
+    "pg": "^8.10.0"
   },
   "devDependencies": {
     "jest": "^29.5.0",
