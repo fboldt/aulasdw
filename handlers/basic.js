@@ -1,6 +1,11 @@
+import { listPosts } from "../controllers/post.js"
+
 const handlers = {}
 
-handlers.home = (req, res) => { res.render("home") }
+handlers.home = async (req, res) => { 
+    const posts = await listPosts()
+    res.render("home", { posts }) 
+}
 
 handlers.sobre = (req, res) => { res.render("sobre") }
 

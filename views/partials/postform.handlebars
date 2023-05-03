@@ -1,0 +1,7 @@
+{{#if username}}
+<form action="post/insert" method="post">
+    <input type="hidden" name="email", value="{{username}}">
+    <textarea name="text" id="msg" cols="30" rows="3"></textarea>
+    <input type="submit" value="publicar">
+</form>
+{{/if}}

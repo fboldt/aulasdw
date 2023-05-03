@@ -12,9 +12,23 @@ async function createTableUsers() {
     return rows
 }
 
+async function createTablePosts() {
+    const sql = `
+        CREATE TABLE IF NOT EXISTS posts (
+            id SERIAL PRIMARY KEY,
+            author INTEGER REFERENCES users(id),
+            text VARCHAR(256),
+            created_at TIMESTAMPTZ DEFAULT NOW()
+        )
+    `
+    const rows = await executeQuery(sql)
+    return rows
+}
+
 async function init() {
     console.log(await executeQuery("SELECT NOW()"))
     console.log(await createTableUsers())
+    console.log(await createTablePosts())
 }
 
 await init()

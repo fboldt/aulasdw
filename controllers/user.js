@@ -13,7 +13,7 @@ async function insertUser(email, senha) {
     return result
 }
 
-async function verificaCredenciais(email, senha) {
+async function checkCredentials(email, senha) {
     const user = await getUser(email)
     if (user) return bcrypt.compareSync(senha, user.senha)
     return false
@@ -26,4 +26,4 @@ async function changePassword(email, senha) {
     return false
 }
 
-export { insertUser, verificaCredenciais, changePassword }
+export { insertUser, checkCredentials, changePassword }
