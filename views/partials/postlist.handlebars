@@ -4,7 +4,7 @@
     {{text}}
     <script>
         if ("{{email}}" == "{{../username}}") {
-            document.write(` - <a href="/post/delete?id={{id}}">x</a>`)
+            document.write(` <a href="/post/delete?id={{id}}" class="btn btn-danger" style="text-weight: bold;">X</a>`)
         }
     </script>
     <br><i style="font-size: xx-small;">{{created_at}}</i>

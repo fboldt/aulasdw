@@ -1,7 +1,12 @@
 {{#if username}}
+<p>O que você está pensando?</p>
 <form action="post/insert" method="post">
+<div class="row mv-3">
     <input type="hidden" name="email", value="{{username}}">
-    <textarea name="text" id="msg" cols="30" rows="3"></textarea>
-    <input type="submit" value="publicar">
+    <textarea name="text" id="msg" cols="50" rows="2"></textarea><br>
+</div>
+<div class="row mt-1">
+    <input type="submit" value="Publicar" class="btn btn-primary fw-bold">
+</div>
 </form>
 {{/if}}

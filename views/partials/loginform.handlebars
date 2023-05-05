@@ -1,19 +1,34 @@
-{{#if username}}
 <div style="text-align: right;">
-    <p><b>{{username}}</b> <a href="/login">logout</a></p>
+{{#if username}}
+    <p><b>{{username}}</b> <a href="/login" class="btn btn-primary m-1">logout</a>
     {{#if cadastro}}
+    </p>
     {{else}}
-    <p><a href="signin/senha">troca senha</a></p>
+    <a href="signin/senha"  class="btn btn-primary m-1">troca senha</a></p>
     {{/if}}
-</div>
 {{else}}
     {{#if cadastro}}
     {{else}}
+    <script>
+        function showloginform(ev) {
+            ev.preventDefault()
+            const elem = document.querySelector("#loginsigninlinks")
+            elem.innerHTML = `
     <form action="/login" method="post">
-        <input type="email" name="email" id="email" placeholder="e-mail">
-        <input type="password" name="senha" id="senha" placeholder="senha">
-        <input type="submit" value="entrar">
+        <input type="email" name="email" id="email" placeholder="e-mail" class="m-1">
+        <input type="password" name="senha" id="senha" placeholder="senha" class="mb-3 m-1"><br>
+        <input type="submit" value="entrar" class="btn btn-primary m-1">
+        <a href="/" class="btn btn-primary m-1">cancelar</a>
     </form>
-    <p><a href="signin">cadastre-se</a></p>
+            `
+        }
+    </script>
+    <p id="loginsigninlinks"><a class="btn btn-primary m-3" id="loginlink">login</a>
+    <a href="signin" class="btn btn-primary">cadastre-se</a></p>
+    <script>
+        const loginlink = document.querySelector("#loginlink")
+        loginlink.addEventListener("click", showloginform)
+    </script>
     {{/if}}
 {{/if}}
+</div>
