@@ -9,7 +9,7 @@ async function listPosts() {
 }
 
 async function deletePost(user, id) {
-    const { email } = getAuthor(id)
+    const { email } = await getAuthor(id)
     if (email == user) {
         return await deletePostDB(id)
     }
