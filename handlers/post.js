@@ -4,7 +4,10 @@ const handlers = {}
 
 handlers.insertPost = async (req, res) => {
     const { email, text } = req.body
-    await insertPost(email, text)
+    const user = res.locals.username
+    if (user == email) {
+        await insertPost(email, text)
+    }
     res.redirect("/")
 }
 
