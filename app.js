@@ -6,6 +6,7 @@ import basicRoutes from './routes/basic.js'
 import loginRoutes from './routes/login.js'
 import signinRoutes from './routes/signin.js'
 import postRoutes from './routes/post.js'
+import apiRoutes from './routes/api.js'
 import dotenv from 'dotenv'
 dotenv.config()
 
@@ -17,10 +18,12 @@ app.use(expressSession({
     secret: process.env.SESSION_SECRET,
 }))
 app.use(getSessionUser)
+app.use(express.json())
 
 app.engine('handlebars', engine());
 app.set('view engine', 'handlebars');
 
+app.use("/api", apiRoutes)
 app.use("/login", loginRoutes)
 app.use("/signin", signinRoutes)
 app.use("/post", postRoutes)

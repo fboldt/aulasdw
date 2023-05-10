@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Batata Lanches</title>
+</head>
+<body>
+    <h2>Batata Lanches</h2>
+    <section id="postssection"></section>
+    <script>
+        fetch("/api")
+        .then(data => data.json())
+        .then(posts => {
+            const postssection = document.querySelector("#postssection")
+            posts.forEach(post => {
+                console.log(post)
+                const postelem = document.createElement("p")
+                postelem.innerHTML = `
+                <b>${post.email}</b>: ${post.text}<br>
+                <i>${post.created_at}</i>`
+                postssection.appendChild(postelem)
+            });
+        })
+    </script>
+</body>
+</html>
