@@ -6,10 +6,9 @@ handlers.login = async (req, res) => {
     const success = await checkCredentials(email, senha)
     if (success) {
         req.session.username = email
-        res.redirect("/")
-    } else {
-        res.render("loginfail")
-    }
+        return res.redirect("/")
+    } 
+    return res.render("loginfail")
  }
 
 handlers.logout = (req, res) => { 
