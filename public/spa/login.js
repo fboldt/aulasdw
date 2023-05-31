@@ -22,7 +22,6 @@ function displayFormLogin() {
     const formLogin = loginSpace.querySelector('form')
     formLogin.addEventListener("submit", function (ev) {
         ev.preventDefault()
-        // console.log("login")
         const payload = new URLSearchParams(new FormData(this))
         sendLogin(payload)
     })
@@ -40,6 +39,8 @@ function sendLogin(payload) {
                 localStorage.setItem("username", email)
                 localStorage.setItem("token", token)
                 displayLinkLogout(email)
+            } else {
+                displayFormLogin()
             }
         })
 }
@@ -47,8 +48,9 @@ function sendLogin(payload) {
 function displayLinkLogout(email) {
     const loginSpace = document.querySelector('#login-space')
     loginSpace.innerHTML = `
-    <span id="username">${email}</span>
-    <a href="">logout</a>`
+    <span id="username" style="display: block" class="mb-3">${email}</span>
+    <a href="" class="btn btn-warning text-white">logout</a>`
+    loginSpace.style.textAlign = "right"
     const linkLogout = loginSpace.querySelector("a")
     linkLogout.addEventListener("click", function (ev) {
         ev.preventDefault()
