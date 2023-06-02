@@ -18,10 +18,11 @@ function displayPosts() {
                 deleteForm.classList.add("deletePostForm")
                 deleteForm.innerHTML = `
                 <input type="hidden" name="email" value="${post.email}">
+                <input type="hidden" name="postid" value="${post.id}">
                 <div class="container">
                     <input type="submit" value="excluir" class="btn btn-danger mb-3">
-                </div>
-                `
+                </div>`
+                deleteForm.addEventListener("submit", sendDeletePost)
                 postelem.appendChild(deleteForm)
                 displayHideDeletePostForm(deleteForm)
                 postssection.appendChild(postelem)
@@ -29,9 +30,25 @@ function displayPosts() {
         })
 }
 
+function sendDeletePost(ev) {
+    ev.preventDefault()
+    const postId = ev.target.querySelector('input[name="postid"]').value
+    const token = localStorage.getItem("token")
+    fetch(`/api/post?id=${postId}`, {
+        method: "DELETE",
+        headers: { authorization: `Bearer ${token}`}
+    })
+        .then(res => res.json())
+        .then(data => { 
+            if (data.success) {
+                ev.target.parentElement.remove()
+            }
+         })
+}
+
 function displayHideDeletePostForm(deleteForm) {
     username = localStorage.getItem("username")
-    const email = deleteForm.querySelector('input[name="email"]').value;
+    const email = deleteForm.querySelector('input[name="email"]').value
     if (username != email) {
         deleteForm.style.display = "none"
     } else {
