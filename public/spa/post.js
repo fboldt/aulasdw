@@ -1,3 +1,27 @@
+document.addEventListener("DOMContentLoaded", insertPostFormBehavior)
+
+function insertPostFormBehavior() {
+    const insertSection = document.querySelector("#insertsection")
+    const insertPostForm = insertSection.querySelector('form')
+    insertPostForm.addEventListener('submit', function (ev) {
+        ev.preventDefault()
+        const token = localStorage.getItem("token")
+        const payload = new URLSearchParams(new FormData(this))
+        fetch("/api/post", {
+            method: "POST",
+            headers: { authorization: `Bearer ${token}` },
+            body: payload,
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    const postssection = document.querySelector("#postssection")
+                    postssection.prepend("inserido")
+                }
+            })
+    })
+}
+
 function displayPosts() {
     fetch("/api")
         .then(data => data.json())
@@ -36,18 +60,18 @@ function sendDeletePost(ev) {
     const token = localStorage.getItem("token")
     fetch(`/api/post?id=${postId}`, {
         method: "DELETE",
-        headers: { authorization: `Bearer ${token}`}
+        headers: { authorization: `Bearer ${token}` }
     })
         .then(res => res.json())
-        .then(data => { 
+        .then(data => {
             if (data.success) {
                 ev.target.parentElement.remove()
             }
-         })
+        })
 }
 
 function displayHideDeletePostForm(deleteForm) {
-    username = localStorage.getItem("username")
+    const username = localStorage.getItem("username")
     const email = deleteForm.querySelector('input[name="email"]').value
     if (username != email) {
         deleteForm.style.display = "none"

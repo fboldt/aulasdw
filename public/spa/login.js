@@ -1,6 +1,4 @@
-document.addEventListener("DOMContentLoaded", () => {
-    checkLogin()
-})
+document.addEventListener("DOMContentLoaded", checkLogin)
 
 function checkLogin(){
     username = localStorage.getItem("username")
