@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", checkLogin)
 
-function checkLogin(){
+function checkLogin() {
     username = localStorage.getItem("username")
     if (username) {
         displayLinkLogout(username)
@@ -9,7 +9,7 @@ function checkLogin(){
     }
 }
 
-function displayFormLogin(msg="") {
+function displayFormLogin(msg = "") {
     const loginSpace = document.querySelector('#login-space')
     loginSpace.innerHTML = `
     <form style="text-align: right;">
@@ -17,6 +17,7 @@ function displayFormLogin(msg="") {
         <input type="password" name="senha" id="senha" placeholder="senha" style="margin: 1px;"><br>
         <span style="color: red;">${msg}</span>
         <input type="submit" value="entrar" class="btn btn-primary" style="margin: 1px;">
+        <button class="btn btn-primary m-2">cadastrar</button>
     </form>`
     const formLogin = loginSpace.querySelector('form')
     formLogin.addEventListener("submit", function (ev) {
@@ -24,6 +25,30 @@ function displayFormLogin(msg="") {
         const payload = new URLSearchParams(new FormData(this))
         sendLogin(payload)
     })
+    const btnSignIn = formLogin.querySelector('button')
+    btnSignIn.addEventListener("click", sendFormSignin)
+}
+
+function sendFormSignin(ev) {
+    ev.preventDefault()
+    const loginSpace = document.querySelector('#login-space')
+    const formLogin = loginSpace.querySelector('form')
+    const payload = new URLSearchParams(new FormData(formLogin))
+    fetch("/api/login", {
+        method: "PUT",
+        body: payload,
+    })
+        .then(res => res.json())
+        .then(data => {
+            const { success, email, token } = data
+            if (success) {
+                localStorage.setItem("username", email)
+                localStorage.setItem("token", token)
+                displayLinkLogout(email)
+            } else {
+                displayFormLogin("Falha no login!")
+            }
+        })
 }
 
 function sendLogin(payload) {

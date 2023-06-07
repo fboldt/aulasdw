@@ -1,10 +1,12 @@
 import { getAllPosts, insertPost, deletePost } from "../api/post.js"
-import { login } from "../api/login.js"
+import { login, signin} from "../api/auth.js"
 import { authenticate } from "../middlewares/token.js"
 import express from 'express'
 const router = express.Router()
 
 router.post("/login", login)
+
+router.put("/login", signin)
 
 router.get("/", getAllPosts)
 
