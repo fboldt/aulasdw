@@ -7,7 +7,7 @@ async function getAllPosts(req, res) {
 
 async function insertPost(req, res) {
     const { email, text } = req.body
-    await insertPostCtrl(email, text)
+    const result = await insertPostCtrl(email, text)
     return res.json({ "success": true })
 }
 

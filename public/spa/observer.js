@@ -17,8 +17,8 @@ function displayHideDeletePostForms() {
 function displayHideInsertPostForm() {
     const insertSection = document.querySelector("#insertsection")
     const username = localStorage.getItem("username")
+    const insertPostForm = insertSection.querySelector('form')
     if (username) {
-        const insertPostForm = insertSection.querySelector('form')
         const emailField = document.createElement('input')
         emailField.setAttribute('type', 'hidden')
         emailField.setAttribute('name', 'email')
@@ -27,6 +27,8 @@ function displayHideInsertPostForm() {
         insertSection.style.display = "block"
     } else {
         insertSection.style.display = "none"
+        const emailInput = insertPostForm.querySelector('input[name="email"]')
+        emailInput.remove()
     }
 }
 
