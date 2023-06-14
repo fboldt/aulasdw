@@ -1,7 +1,9 @@
-import { insertPost as insertPostDB, listPosts as listPostsDB, deletePost as deletePostDB, getAuthor } from "../db/posts.js"
+import { insertPost as insertPostDB, listPosts as listPostsDB, deletePost as deletePostDB, getAuthor, getPost } from "../db/posts.js"
 
 async function insertPost(email, text) {
-    return await insertPostDB(email, text)
+    const result = await insertPostDB(email, text)
+    const postId = result[0].id
+    return await getPost(postId)    
 }
 
 async function listPosts() {

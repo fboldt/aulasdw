@@ -8,7 +8,8 @@ async function getAllPosts(req, res) {
 async function insertPost(req, res) {
     const { email, text } = req.body
     const result = await insertPostCtrl(email, text)
-    return res.json({ "success": true })
+    result[0].success = true
+    return res.json(result[0])
 }
 
 async function deletePost (req, res) {

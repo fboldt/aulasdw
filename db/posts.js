@@ -6,8 +6,13 @@ async function insertPost(authorEmail, text) {
     if (rows.length != 1) return false
     const authorId = rows[0].id
     const values = [authorId, text]
-    const query = `INSERT INTO posts (author, text) VALUES ($1, $2)`
+    const query = `INSERT INTO posts (author, text) VALUES ($1, $2) RETURNING id`
     return await executeQuery(query, values)
+}
+
+async function getPost(postId) {
+    const query = `SELECT posts.id, users.email, posts.text, posts.created_at FROM posts INNER JOIN users ON posts.author=users.id WHERE posts.id = ${postId}`
+    return await executeQuery(query)
 }
 
 async function listPosts() {
@@ -29,4 +34,4 @@ async function getAuthor(id) {
     return false
 }
 
-export { insertPost, listPosts, deletePost, getAuthor }
+export { insertPost, listPosts, deletePost, getAuthor, getPost }

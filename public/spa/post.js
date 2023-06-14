@@ -14,9 +14,10 @@ function insertPostFormBehavior() {
         })
             .then(res => res.json())
             .then(data => {
+                console.log(data)
                 if (data.success) {
-                    const postssection = document.querySelector("#postssection")
-                    postssection.prepend("inserido")
+                    displayPost(data)
+                    insertPostForm.querySelector("textarea").value = ""
                 }
             })
     })
@@ -28,30 +29,35 @@ function displayPosts() {
         .then(posts => {
             const postssection = document.querySelector("#postssection")
             postssection.innerHTML = ""
-            posts.forEach(post => {
-                const postelem = document.createElement("div")
-                postelem.classList.add("card")
-                postelem.classList.add("mb-3")
-                postelem.classList.add("rounded")
-                postelem.innerHTML = `<div class="card-body">
+            posts.reverse().forEach(post => {
+                displayPost(post)
+            });
+        })
+}
+
+function displayPost(post) {
+    const postssection = document.querySelector("#postssection")
+    const postelem = document.createElement("div")
+    postelem.classList.add("card")
+    postelem.classList.add("mb-3")
+    postelem.classList.add("rounded")
+    postelem.innerHTML = `<div class="card-body">
                 <span style="font-size: small">${post.email}</span>
                 <span style="font-size: x-small">(${post.created_at})</span>
                 <p class="card-text">${post.text}</p>
                 </div>`
-                const deleteForm = document.createElement("form")
-                deleteForm.classList.add("deletePostForm")
-                deleteForm.innerHTML = `
+    const deleteForm = document.createElement("form")
+    deleteForm.classList.add("deletePostForm")
+    deleteForm.innerHTML = `
                 <input type="hidden" name="email" value="${post.email}">
                 <input type="hidden" name="postid" value="${post.id}">
                 <div class="container">
                     <input type="submit" value="excluir" class="btn btn-danger mb-3">
                 </div>`
-                deleteForm.addEventListener("submit", sendDeletePost)
-                postelem.appendChild(deleteForm)
-                displayHideDeletePostForm(deleteForm)
-                postssection.appendChild(postelem)
-            });
-        })
+    deleteForm.addEventListener("submit", sendDeletePost)
+    postelem.appendChild(deleteForm)
+    displayHideDeletePostForm(deleteForm)
+    postssection.prepend(postelem)
 }
 
 function sendDeletePost(ev) {
