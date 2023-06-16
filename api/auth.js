@@ -1,5 +1,11 @@
-import { checkCredentials, insertUser } from "../controllers/user.js"
+import { checkCredentials, insertUser, changePassword } from "../controllers/user.js"
 import jwt from 'jsonwebtoken'
+
+async function mudaSenha(req, res) {
+    const { email, senha } = req.body
+    const { success } = await changePassword(email, senha)
+    return res.json({ success })
+}
 
 async function login(req, res) {
     const { email, senha } = req.body
@@ -21,4 +27,4 @@ async function signin(req, res) {
     return res.json({ success: false })
 }
 
-export { login, signin }
+export { login, signin, mudaSenha }

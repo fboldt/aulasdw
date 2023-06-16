@@ -14,7 +14,6 @@ function insertPostFormBehavior() {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data)
                 if (data.success) {
                     displayPost(data)
                     insertPostForm.querySelector("textarea").value = ""

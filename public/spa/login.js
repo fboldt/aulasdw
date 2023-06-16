@@ -15,7 +15,6 @@ function displayFormLogin(msg = "") {
     <form style="text-align: right;">
         <input type="email" name="email" id="email" placeholder="e-mail" style="margin: 1px;"><br>
         <input type="password" name="senha" id="senha" placeholder="senha" style="margin: 1px;"><br>
-        <span style="color: red;">${msg}</span>
         <input type="submit" value="entrar" class="btn btn-primary" style="margin: 1px;">
         <button class="btn btn-primary m-2">cadastrar</button>
     </form>`
@@ -72,14 +71,47 @@ function sendLogin(payload) {
 function displayLinkLogout(email) {
     const loginSpace = document.querySelector('#login-space')
     loginSpace.innerHTML = `
-    <span id="username" style="display: block" class="mb-3">${email}</span>
-    <a href="" class="btn btn-warning text-white">logout</a>`
+    <span id="username" class="mb-3">${email}</span>
+    <a href="" class="btn btn-warning text-white" id="linklogout">logout</a><br>
+    <a href="" class="btn btn-secondary text-white mt-1" id="trocasenha">troca senha</a>`
     loginSpace.style.textAlign = "right"
-    const linkLogout = loginSpace.querySelector("a")
+    const linkLogout = loginSpace.querySelector("#linklogout")
     linkLogout.addEventListener("click", function (ev) {
         ev.preventDefault()
         localStorage.removeItem("username")
         localStorage.removeItem("token")
         displayFormLogin()
+    })
+    const linkTrocaSenha = loginSpace.querySelector("#trocasenha")
+    linkTrocaSenha.addEventListener("click", function (ev) {
+        ev.preventDefault()
+        loginSpace.innerHTML = `
+        <form style="text-align: right;">
+            <input type="hidden" name="email" id="email" placeholder="e-mail" style="margin: 1px;" value="${email}">
+            ${email}<br>
+            <input type="password" name="senha" id="senha" placeholder="senha" style="margin: 1px;"><br>
+            <input type="submit" value="mudar" class="btn btn-primary" style="margin: 1px;">
+            <button class="btn btn-primary m-2">cancelar</button>
+        </form>`
+        const cancelar = loginSpace.querySelector("button")
+        cancelar.addEventListener("click", function (ev) {
+            ev.preventDefault()
+            displayLinkLogout(email)
+        })
+        const formMudaSenha = loginSpace.querySelector("form")
+        formMudaSenha.addEventListener("submit", function (ev) {
+            ev.preventDefault()
+            const token = localStorage.getItem("token")
+            const payload = new URLSearchParams(new FormData(this))
+            fetch("/api/senha", {
+                method: "PUT",
+                headers: { authorization: `Bearer ${token}` },
+                body: payload,
+            })
+                .then(res => res.json())
+                .then(data => {
+                    displayLinkLogout(email)
+                })
+        })
     })
 }
