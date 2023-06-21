@@ -17,6 +17,8 @@ function insertPostFormBehavior() {
                 if (data.success) {
                     displayPost(data)
                     insertPostForm.querySelector("textarea").value = ""
+                } else {
+                    logout()
                 }
             })
     })
@@ -71,6 +73,8 @@ function sendDeletePost(ev) {
         .then(data => {
             if (data.success) {
                 ev.target.parentElement.remove()
+            } else {
+                logout()
             }
         })
 }

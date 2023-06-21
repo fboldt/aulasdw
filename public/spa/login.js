@@ -68,6 +68,12 @@ function sendLogin(payload) {
         })
 }
 
+function logout() {
+    localStorage.removeItem("username")
+    localStorage.removeItem("token")
+    displayFormLogin()
+}
+
 function displayLinkLogout(email) {
     const loginSpace = document.querySelector('#login-space')
     loginSpace.innerHTML = `
@@ -78,9 +84,7 @@ function displayLinkLogout(email) {
     const linkLogout = loginSpace.querySelector("#linklogout")
     linkLogout.addEventListener("click", function (ev) {
         ev.preventDefault()
-        localStorage.removeItem("username")
-        localStorage.removeItem("token")
-        displayFormLogin()
+        logout()
     })
     const linkTrocaSenha = loginSpace.querySelector("#trocasenha")
     linkTrocaSenha.addEventListener("click", function (ev) {
