@@ -37,6 +37,10 @@ function displayPosts() {
         })
 }
 
+setInterval(() => {
+    displayPosts()
+}, 1000 * 60);
+
 function displayPost(post) {
     const postssection = document.querySelector("#postssection")
     const postelem = document.createElement("div")
